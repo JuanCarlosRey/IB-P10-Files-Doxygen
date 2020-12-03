@@ -1,0 +1,32 @@
+\begin{theindex}
+
+  \item {fibonacci\_main.cc}, \hyperpage{1}
+    \subitem {main}, \hyperpage{2}
+  \item {fibonacci\_sum}
+    \subitem {fibonacci\_sum.cc}, \hyperpage{4}
+    \subitem {fibonacci\_sum.h}, \hyperpage{7}
+  \item {fibonacci\_sum.cc}, \hyperpage{3}
+    \subitem {fibonacci\_sum}, \hyperpage{4}
+    \subitem {Usage}, \hyperpage{4}
+  \item {fibonacci\_sum.h}, \hyperpage{6}
+    \subitem {fibonacci\_sum}, \hyperpage{7}
+    \subitem {kHelpText}, \hyperpage{9}
+    \subitem {Usage}, \hyperpage{7}
+
+  \indexspace
+
+  \item {kHelpText}
+    \subitem {fibonacci\_sum.h}, \hyperpage{9}
+
+  \indexspace
+
+  \item {main}
+    \subitem {fibonacci\_main.cc}, \hyperpage{2}
+
+  \indexspace
+
+  \item {Usage}
+    \subitem {fibonacci\_sum.cc}, \hyperpage{4}
+    \subitem {fibonacci\_sum.h}, \hyperpage{7}
+
+\end{theindex}
