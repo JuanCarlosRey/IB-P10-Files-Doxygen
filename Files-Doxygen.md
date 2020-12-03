@@ -89,7 +89,7 @@ Si no se le pasa el nombre del fichero como parámetro, creará un fichero con n
 para su uso.
 En el directorio de trabajo de esta práctica se encuentra un fichero `Doxyfile` ya listo para usarse con
 proyectos de C++.
-Se ha incluído asimismo el código fuente de un programa (`fibonacci_sum`) para ilustrar con el mismo el uso de
+Se ha incluído asimismo (directorio `fibonacci_sum`) el código fuente de un programa para ilustrar con el mismo el uso de
 documentación con Doxygen.
 Si revisa Ud. el fichero `Doxyfile` (es un fichero de texto) verá toda una serie de opciones que el programa permite.
 Cada opción va precedida de una explicación de su finalidad y funcionamiento, de modo que puede Ud. probar a
@@ -98,7 +98,8 @@ En [esta página](https://www.doxygen.nl/manual/config.html)
 puede consultarse la finalidad y funcionamiento de cada una de las etiquetas (Tags) que se usan en el fichero
 de configuración de Doxygen.
 
-Para generar la documentación de su aplicación, simplemente ejecute
+Para generar la documentación de su aplicación, colóquese en el directorio de su proyecto 
+(`fibonacci_sum` en esta práctica) y ejecute:
 ```
 doxygen Doxyfile
 ```
