@@ -68,7 +68,7 @@ de un documento puede referirse fácilmente al código fuente.
 Doxygen extrae la documentación de los comentarios de los ficheros de código fuente y 
 y puede generar la salida en diferentes formatos entre los cuales están HTML, PDF LaTeX o páginas man de Unix.
 
-En esta asignatura no nos proponemos un uso exhaustivo de Doxygen pero sí que se promoverá que la
+En esta asignatura no se propone un uso exhaustivo de Doxygen pero sí se promueve que la
 documentación de los programas desarrollados se realice en el formato reconocido por Doxygen, que se ha
 convertido en un estándar de facto.
 
@@ -89,7 +89,9 @@ Si no se le pasa el nombre del fichero como parámetro, creará un fichero con n
 para su uso.
 En el directorio de trabajo de esta práctica se encuentra un fichero `Doxyfile` ya listo para usarse con
 proyectos de C++.
-Si revisa Ud. ese fichero de texto verá toda una serie de opciones que el programa permite.
+Se ha incluído asimismo el código fuente de un programa (`fibonacci_sum`) para ilustrar con el mismo el uso de
+documentación con Doxygen.
+Si revisa Ud. el fichero `Doxyfile` (es un fichero de texto) verá toda una serie de opciones que el programa permite.
 Cada opción va precedida de una explicación de su finalidad y funcionamiento, de modo que puede Ud. probar a
 modificar algunas de ellas si lo desea.
 En [esta página](https://www.doxygen.nl/manual/config.html)
@@ -199,11 +201,15 @@ La guía
 de documentación de código del proyecto LLST es la referencia que se adoptará en la asignatura para documentar
 el código de los programas que se desarrollen.
 
+Por otra parte, estudie atentamente todo lo que se indica en el epígrafe
+[Comments](https://google.github.io/styleguide/cppguide.html#Comments)
+de la Guía de Estilo de Google y ponga en práctica todo lo que en ella se propone, usando el formato Doxygen
+para todos los comentarios que introduzca en su código fuente.
 
 ### Referencias
 * [Doxygen](https://en.wikipedia.org/wiki/Doxygen)
 * [Latex](https://en.wikipedia.org/wiki/LaTeX)
 * [Overview of supported JavaDoc style tags](http://www.time2help.com/doc/online_help/idh_java_doc_tag_support.htm)
 * [Documenting C++ Code](https://developer.lsst.io/cpp/api-docs.html)
-* [git - the simple guide](https://rogerdudler.github.io/git-guide/)
+* [Comments](https://google.github.io/styleguide/cppguide.html#Comments)
 * [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
