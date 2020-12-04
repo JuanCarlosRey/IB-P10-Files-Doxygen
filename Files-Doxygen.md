@@ -31,16 +31,15 @@ Durante la segunda guerra mundial, el ejército alemán utilizó la máquina con
 para codificar sus mensajes. 
 Básicamente dada una *semilla* la máquina generaba una secuencia de números pseudoaleatorios que era 
 difícil de reproducir, incluso aunque los detalles técnicos de la máquina pudieran ser descubiertos.
-
 Los aliados habían capturado algunas de las máquinas *Enigma*, de modo que conocían la forma
 en que la máquina trabajaba, pero los trabajos que se realizaron para descubrir los códigos de *Enigma* fueron
 los fundamentos de la criptografía moderna. 
 Alan Turing participó en este tipo de trabajos.
 Si está interesado en conocer más sobre esta historia vea la película
 [The Imitation Game](https://en.wikipedia.org/wiki/The_Imitation_Game)
-(*Descifrando Enigma* en español)
+(*Descifrando Enigma* en español).
 
-La criptología es la rama de conocimiento que se ocupa del estudio y diseño de sistemas que permitan 
+La criptología es la rama de conocimiento que se ocupa del estudio y diseño de sistemas que permiten 
 comunicaciones secretas entre un emisor de un mensaje y uno o varios receptores del mismo. 
 Inicialmente las únicas aplicaciones de la criptología fueron militares, pero hoy en día son muchísimas otras.
 Por ejemplo, en los ordenadores multiusuario, cada usuario mantiene sus ficheros de una forma 
@@ -93,7 +92,7 @@ tomando la clave de forma cíclica (cuando se acaba con el último carácter de 
 Antes de operar de este modo se procesará la clave secreta haciendo `xor` a cada uno de sus caracteres con la constante 128.
 
 Una ventaja de este método es su especial aptitud para ser utilizado en un ordenador 
-(puesto que la operación o exclusiva se realiza muy eficientemente en un ordenador). 
+puesto que la operación o exclusiva se realiza muy eficientemente en un ordenador. 
 Otra ventaja del método es que la operación de desencriptado consiste en hacer exactamente 
 lo mismo al texto que se ha encriptado (con la misma clave secreta, por supuesto).
 
@@ -136,15 +135,15 @@ cualquiera de sus desarrollos.
 Si el programa se ejecuta sin pasar parámetros en la línea de comandos, debemos obtener el siguiente mensaje:
 
 ```
-./cripto -- Codificación de ficheros
-Modo de uso: ./cripto input_file output_file method password operation
+./cripto -- Cifrado de ficheros
+Modo de uso: ./cripto fichero_entrada fichero_salida método password operación
 Pruebe ./cripto --help para más información
 ```
 
 Si el programa se ejecuta pasando la opción `--help` se ha de obtener:
 
 ```
-./cripto -- Codificación de ficheros
+./cripto -- Cifrado de ficheros
 Modo de uso: ./cripto fichero_entrada fichero_salida método password operación
 
 fichero_entrada: Fichero a codificar
@@ -154,11 +153,12 @@ método:          Indica el método de encriptado
                    2: Cifrado de César
 password:        Palabra secreta en el caso de método 1, Valor de K en el método 2
 operación:       Operación a realizar en el fichero
-                +: encriptar el fichero
-                -: desencriptar el fichero
+                   +: encriptar el fichero
+                   -: desencriptar el fichero
 ```
 
 El programa solo se ejecutará cuando se le hayan pasado por línea de comandos los parámetros necesarios.
+En caso de detectar cualquier inconsistencia en los parámetros, el programa debe abortar su ejecución.
 Se indicará asimismo un mensaje de error si el programa no consigue abrir el fichero de entrada.
 
 ### Documentación de código. Doxygen
@@ -169,8 +169,7 @@ La documentación está escrita en el propio código fuente de los programas, y 
 fácil de mantener actualizada. 
 Doxygen puede hacer referencias cruzadas entre la documentación y el código, de modo que el lector 
 de un documento puede referirse fácilmente al código fuente.
-
-Doxygen extrae la documentación de los comentarios de los ficheros de código fuente
+La herramienta extrae la documentación de los comentarios de los ficheros de código fuente
 y puede generar la salida en diferentes formatos entre los cuales están HTML, PDF LaTeX o páginas man de Unix.
 
 En esta asignatura no se propone un uso exhaustivo de Doxygen pero sí se promueve que la
@@ -187,8 +186,8 @@ $ sudo apt install texlive-latex-base
 $ sudo apt install texlive-latex-recommended
 $ sudo apt install texlive-latex-extra
 ```
-Los anteriores son paquetes necesarios para compilar ficheros en formato Latex.
-Más adelante en este documento se explica la necesidad de los programas que suministran estos paquetes.
+Estos paquetes son necesarios para compilar ficheros en formato Latex.
+Más adelante en este documento se justifica la necesidad de los programas que suministran estos paquetes.
 
 En el [manual de Doxygen](https://www.doxygen.nl/manual/starting.html) indica cómo comenzar a trabajar con la
 herramienta.
@@ -219,6 +218,8 @@ doxygen Doxyfile
 
 Con el fichero `Doxyfile` que se suministra, la herramienta creará un subdirectorio `doc` en el directorio
 raíz de su proyecto en el que alojará toda la documentación generada.
+El directorio donde Doxygen genera su salida se especifica con la etiqueta 
+`OUTPUT_DIRECTORY` (línea 61 del fichero `Doxyfile` suministrado).
 Con la configuración suministrada se generan dos subdirectorios dentro de `doc`: `html` y `latex`.
 Si abre con un navegador el fichero `doc/html/index.html` accederá a la página principal de la documentación
 generada para el programa.
@@ -238,7 +239,13 @@ La sección
 [Documenting the code](https://www.doxygen.nl/manual/config.html)
 del manual de Doxygen indica cómo comentar el código fuente de modo que los comentarios sean procesados por
 Doxygen para incorporarlos a la documentación generada.
-En la asignatura se propone utilizar comentarios de tipo JavaDoc para comentarios de bloque:
+
+La guía 
+[Documenting C++ Code](https://developer.lsst.io/cpp/api-docs.html) 
+de documentación de código del proyecto LLST es la referencia que se adoptará en la asignatura para documentar
+el código de los programas que se desarrollen.
+Se utilizarán comentarios de tipo JavaDoc para comentarios de bloque:
+
 ```
 /**
  * ... text ...
@@ -310,11 +317,6 @@ Si fuera necesario se incluirá a continuación una descripción más detallada.
 Obviamente el comentario específico así como el nombre del fichero debieran particularizarse para cada caso
 concreto.
 
-La guía 
-[Documenting C++ Code](https://developer.lsst.io/cpp/api-docs.html) 
-de documentación de código del proyecto LLST es la referencia que se adoptará en la asignatura para documentar
-el código de los programas que se desarrollen.
-
 Por otra parte, estudie atentamente todo lo que se indica en el epígrafe
 [Comments](https://google.github.io/styleguide/cppguide.html#Comments)
 de la Guía de Estilo de Google y ponga en práctica todo lo que en ella se propone, usando el formato Doxygen
@@ -324,7 +326,6 @@ para todos los comentarios que introduzca en su código fuente.
 * [Cifrado XOR](https://es.wikipedia.org/wiki/Cifrado_XOR)
 * [Cifrado César](https://es.wikipedia.org/wiki/Cifrado_C%C3%A9sar)
 * [Doxygen](https://en.wikipedia.org/wiki/Doxygen)
-* [Latex](https://en.wikipedia.org/wiki/LaTeX)
 * [Overview of supported JavaDoc style tags](http://www.time2help.com/doc/online_help/idh_java_doc_tag_support.htm)
 * [Documenting C++ Code](https://developer.lsst.io/cpp/api-docs.html)
 * [Comments](https://google.github.io/styleguide/cppguide.html#Comments)
