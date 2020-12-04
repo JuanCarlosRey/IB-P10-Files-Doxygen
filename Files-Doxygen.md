@@ -18,14 +18,96 @@ que se tendrán en cuenta a la hora de evaluar esta práctica:
 * Antes de su ejecución, todos los programas que desarrolle, deben imprimir en pantalla un
   mensaje indicando la finalidad del programa así como la información que precisará del usuario para su correcta ejecución.
 
-### Trabajo previo: Doxygen
-Instale Doxygen en su máquina virtual de la asignatura:
+### Introducción a la criptografía
+Durante la segunda guerra mundial, el ejército alemán utilizó la máquina conocida como *Enigma*
+para codificar sus mensajes. 
+Básicamente dada una *semilla* la máquina generaba una secuencia de números pseudoaleatorios que era 
+difícil de reproducir, incluso aunque los detalles técnicos de la máquina pudieran ser descubiertos.
+
+Los aliados habían capturado algunas de las máquinas *Enigma*, de forma que conocían la forma
+en que la máquina trabajaba, pero los trabajos que se realizaron para descubrir los códigos de *Enigma* fueron
+los fundamentos de la informática moderna. 
+El propio Alan Turing participó en este tipo de trabajos.
+Si está interesado en conocer más sobre esta historia vea la película
+[The Imitation Game](https://en.wikipedia.org/wiki/The_Imitation_Game)
+(*Descifrando Enigma* en español)
+
+La criptología es la rama de conocimiento que se ocupa del estudio y diseño de sistemas que permitan 
+comunicaciones secretas entre un emisor de un mensaje y uno o varios receptores del mismo. 
+Inicialmente las únicas aplicaciones de la criptología fueron militares, pero hoy en día son muchísimas otras.
+Por ejemplo, en los computadores multiusuarios, cada usuario prefiere mantener sus ficheros de una forma 
+que no sean legibles para otros usuarios "indiscretos". 
+Para conseguir esto, los ficheros se codifican (encriptan) utilizando una clave que sólo conoce su propietario. 
+Alguna de la información que enviamos a través de internet viaja también de forma codificada para protegerla de receptores no deseados.
+
+Para encriptar un fichero hay muchas alternativas. 
+Todas ellas consisten en transformar cada uno de los caracteres del fichero original en otro carácter
+diferente siguiendo una determinada transformación. 
+Indicaremos dos métodos diferentes de encriptado. 
+
+## Encriptado xor (or exclusiva)
+El método requiere una clave secreta de encriptado/desencriptado.
+
+A cada uno de los caracteres del fichero se le hará una transformación, 
+que consistirá en hacerle la operación `xor` con un carácter de la clave secreta. 
+Estudie el capítulo 
+[Bitwise operators](https://www.learncpp.com/cpp-tutorial/bitwise-operators/)
+del tutorial y recuerde que el operador (de bits) en C/C++ es `^`
+
+El carácter de la clave secreta con el que se transforma el carácter original, se variará de forma cíclica. 
+P. ej. si suponemos que la clave secreta es la palabra `alfa`, y las primeras palabras del texto son 
+*Informática Básica* los primeros caracteres del fichero de salida serán:
+
 ```
-$ sudo apt install doxygen
+carácter 1	I xor a
+carácter 2	n xor l
+carácter 3	f xor f
+carácter 4	o xor a
+carácter 5	r xor a
+carácter 6	m xor l
+carácter 7	á xor f
+carácter 8	t xor a
+carácter 9	i xor a
+carácter 9	c xor l
+carácter 10	a xor f
+carácter 11	  xor a
+carácter 12	B xor a
+carácter 13	á xor l
+carácter 14	s xor f
+   ...
 ```
 
+Es decir, se va haciendo la operación `xor` de cada uno de los caracteres del 
+texto de entrada con cada uno de los caracteres de la clave secreta, 
+tomando la clave de forma cíclica (cuando se acaba con el último carácter de la clave, se comienza de nuevo con el primero).
 
-### Ejercicios 
+Antes de operar de este modo se procesará la clave secreta haciendo `xor` a cada uno de sus caracteres con el número 128.
+
+Una ventaja de este método es su especial aptitud para ser utilizado en un ordenador 
+(puesto que la operación o exclusiva se realiza muy eficientemente en un ordenador). 
+
+Otra ventaja del método es que la operación de desencriptado consiste en hacer exactamente 
+lo mismo al texto que se ha encriptado (con la misma clave secreta, por supuesto).
+
+## Cifrado de César
+Como se deduce de su nombre, este método era usado ya en tiempos de los romanos. 
+En este caso, la codificación es como sigue: si una letra en el texto a codificar es la N-ésima 
+letra del alfabeto, sustitúyase esa letra por la (N + K)-ésima letra del alfabeto. 
+(César utilizaba el valor K = 3).
+Se muestra a continuación un texto encriptado siguiendo este método y utilizando K = 1:
+
+```
+Texto original:	Navidad, Navidad, dulce navidad
+Texto encriptado:	Obwjebe-!Obwjebe-!evmdf!obwjebe
+```
+
+Se puede optar por hacer fijo el valor de K o bien solicitarlo al usuario.
+
+Evidentemente, el desencriptado del fichero consistirá en realizar la operación inversa, 
+y en este caso, el valor de K a utilizar debería solicitarse al usuario para garantizar que está autorizado a leer el fichero.
+
+
+### Entorno de trabajo
 Al realizar los siguientes ejercicios cree dentro de su repositorio de esta práctica un directorio diferente
 para cada uno de los ejercicios.
 Ponga a cada uno de esos directorios nombres significativos.
@@ -45,19 +127,41 @@ Desarrolle cada uno de estos ejercicios de forma incremental, probando cada una 
 desarrollando. Utilice el depurador de VSC para corregir cualquier tipo de error semántico que se produzca en
 cualquiera de sus desarrollos.
 
-1. Escriba un programa `find_first_of.cc' que dada una cadena y un carácter, determine la primera posición 
-   de la cadena en la que se encuentra ese carácter, en caso de que se encuentre. 
-	 Si el carácter no se encuentra, el programa imprimirá -1. 
-	 Se considerará que la primera posición de la cadena (la correspondiente al primer carácter de la misma) es la cero:
-```
-$ ./find_first_of abracadabra r
-2
+### Ejercicios 
+1. Desarrolle en C++ un programa `cripto.cc` cuya finalidad será encriptar y/o desencriptar ficheros de texto.
+Si el programa se ejecuta sin pasar parámetros en la línea de comandos, debemos obtener el siguiente mensaje:
 
-$ ./find_first_of AlbertEinstein Z
--1
+```
+./cripto -- Codificación de ficheros
+Modo de uso: ./cripto input_file output_file method password operation
+Pruebe ./cripto --help para más información
 ```
 
-### Documentación de código. Doxigen
+Si el programa se ejecuta pasando la opción `--help` se ha de obtener:
+
+```
+./cripto -- Codificación de ficheros
+Modo de uso: ./cripto fichero_entrada fichero_salida método password operación
+
+fichero_entrada: el fichero a codificar
+fichero_salida: el fichero codificado
+método: Indica el método de encriptado
+                1: Cifrado xor 
+                2: Cifrado de César
+operación:   operación a realizar en el fichero
+                +: encriptar el fichero
+                -: desencriptar el fichero
+```
+
+El programa solo se ejecutará cuando se le hayan pasado por línea de comandos los parámetros necesarios.
+Se indicará asimismo un mensaje de error si el programa no consigue abrir el fichero de entrada.
+
+
+1. Escriba un programa `longest.cc` que tome como parámetro el nombre de un fichero de texto e imprima en
+pantalla las tres palabras más largas que encuentre en ese fichero.
+Compruebe el correcto funcionamiento de su programa con diferentes ficheros.
+
+### Documentación de código. Doxygen
 [Doxygen](https://en.wikipedia.org/wiki/Doxygen)
 es una herramienta de código abierto generadora de documentación para escribir documentación de referencia de software. 
 La documentación está escrita en el propio código fuente de los programas, y por lo tanto es relativamente 
@@ -76,6 +180,14 @@ Comience por instalar Doxygen en su máquina virtual de la asignatura:
 ```
 $ sudo apt install doxygen
 ```
+Instale también los siguientes paquetes:
+```
+$ sudo apt install texlive-latex-base
+$ sudo apt install texlive-latex-recommended
+$ sudo apt install texlive-latex-extra
+```
+Se trata de paquetes necesarios para compilar ficheros en formato Latex.
+Más adelante en este documento se explica la necesidad de los programas que suministran estos paquetes.
 
 En el [manual de Doxygen](https://www.doxygen.nl/manual/starting.html) indica cómo comenzar a trabajar con la
 herramienta.
