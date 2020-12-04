@@ -5,6 +5,7 @@ Los objetivos de esta práctica son que el alumnado:
 * Desarrolle programas sencillos en C++ que utilicen ficheros, así como todas las características del lenguaje
   estudiadas
 * Aloje todo el código fuente de sus programas en repositorios privados de GitHub
+* Sepa depurar sus programas usando la interfaz de depuración del VSC
 * Conozca la herramienta Doxygen
 * Incluya en sus programas comentarios en el formato requerido por Doxygen
 
@@ -20,6 +21,7 @@ que se tendrán en cuenta a la hora de evaluar esta práctica:
   variables que utilice para iterar en un bucle.
 * Antes de su ejecución, todos los programas que desarrolle, deben imprimir en pantalla un
   mensaje indicando la finalidad del programa así como la información que precisará del usuario para su correcta ejecución.
+* Ante la presencia de cualquier bug, el alumnado ha de conocer las técnicas básicas de depuración usando VSC
 * Todos los ficheros de código del proyecto correspondiente a esta práctica han de alojarse en un repositorio
   de GitHub
 * Los programas deben contener comentarios adecuados en el formato requerido por Doxygen
@@ -88,7 +90,7 @@ Es decir, se va haciendo la operación `xor` de cada uno de los caracteres del
 texto de entrada con cada uno de los caracteres de la clave secreta, 
 tomando la clave de forma cíclica (cuando se acaba con el último carácter de la clave, se comienza de nuevo con el primero).
 
-Antes de operar de este modo se procesará la clave secreta haciendo `xor` a cada uno de sus caracteres con el número 128.
+Antes de operar de este modo se procesará la clave secreta haciendo `xor` a cada uno de sus caracteres con la constante 128.
 
 Una ventaja de este método es su especial aptitud para ser utilizado en un ordenador 
 (puesto que la operación o exclusiva se realiza muy eficientemente en un ordenador). 
@@ -99,7 +101,7 @@ lo mismo al texto que se ha encriptado (con la misma clave secreta, por supuesto
 
 Como se deduce de su nombre, 
 [este método](https://es.wikipedia.org/wiki/Cifrado_C%C3%A9sar)
-este método era usado ya en tiempos de los romanos. 
+era usado ya en tiempos de los romanos. 
 En este caso, la codificación es como sigue: si una letra en el texto a codificar es la N-ésima 
 letra del alfabeto, sustitúyase esa letra por la (N + K)-ésima letra del alfabeto. 
 (César utilizaba el valor K = 3).
@@ -115,28 +117,21 @@ Se puede optar por hacer fijo el valor de K o bien solicitarlo al usuario.
 Evidentemente, el desencriptado del fichero consistirá en realizar la operación inversa, 
 y en este caso, el valor de K a utilizar debería solicitarse al usuario para garantizar que está autorizado a leer el fichero.
 
-
 ### Entorno de trabajo
-Al realizar los siguientes ejercicios cree dentro de su repositorio de esta práctica un directorio diferente
-para cada uno de los ejercicios.
-Ponga a cada uno de esos directorios nombres significativos.
-Haga que cada uno de sus programas conste de 3 ficheros:
-* Un fichero `mi_programa.cc` (programa principal) que contendrá la función `main` e incluirá el fichero de cabecera `funciones.h`
-* El fichero `funciones.h` que contendrá las declaraciones de las diferentes funciones que se utilizan en el
-  programa principal para resolver el ejercicio en cuestión.
-* El fichero `funciones.cc` que contendrá el código (definiciones) de las funciones declaradas en el fichero
+Haga que el proyecto correspondiente a esta práctica conste al menos de 3 ficheros:
+* Un fichero `cripto.cc` (programa principal) que contendrá la función `main` e incluirá el fichero de cabecera `funciones_cripto.h`
+* El fichero `funciones_cripto.h` que contendrá las declaraciones de las diferentes funciones que se utilizan en el
+  programa principal.
+* El fichero `funciones_cripto.cc` que contendrá el código (definiciones) de las funciones declaradas en el fichero
   de cabecera.
 
-Modifique los nombres de los ficheros que aquí se proponen para adaptarlos al ejercicio en cuestión.
+La compilación del programa ha de estar automatizada mediante un fichero Makefile.
 
-La compilación de los programas correspondientes a cada ejercicio se automatizará con un fichero Makefile para
-cada ejercicio.
-
-Desarrolle cada uno de estos ejercicios de forma incremental, probando cada una de las funciones que va Ud.
+Desarrolle su programa de forma incremental, probando cada una de las funciones que va Ud.
 desarrollando. Utilice el depurador de VSC para corregir cualquier tipo de error semántico que se produzca en
 cualquiera de sus desarrollos.
 
-### Ejercicios 
+### Ejercicio 
 1. Desarrolle en C++ un programa `cripto.cc` cuya finalidad será encriptar y/o desencriptar ficheros de texto.
 Si el programa se ejecuta sin pasar parámetros en la línea de comandos, debemos obtener el siguiente mensaje:
 
@@ -152,12 +147,13 @@ Si el programa se ejecuta pasando la opción `--help` se ha de obtener:
 ./cripto -- Codificación de ficheros
 Modo de uso: ./cripto fichero_entrada fichero_salida método password operación
 
-fichero_entrada: el fichero a codificar
-fichero_salida: el fichero codificado
-método: Indica el método de encriptado
-                1: Cifrado xor 
-                2: Cifrado de César
-operación:   operación a realizar en el fichero
+fichero_entrada: Fichero a codificar
+fichero_salida:  Fichero codificado
+método:          Indica el método de encriptado
+                   1: Cifrado xor 
+                   2: Cifrado de César
+password:        Palabra secreta en el caso de método 1, Valor de K en el método 2
+operación:       Operación a realizar en el fichero
                 +: encriptar el fichero
                 -: desencriptar el fichero
 ```
@@ -165,20 +161,16 @@ operación:   operación a realizar en el fichero
 El programa solo se ejecutará cuando se le hayan pasado por línea de comandos los parámetros necesarios.
 Se indicará asimismo un mensaje de error si el programa no consigue abrir el fichero de entrada.
 
-
-1. Escriba un programa `longest.cc` que tome como parámetro el nombre de un fichero de texto e imprima en
-pantalla las tres palabras más largas que encuentre en ese fichero.
-Compruebe el correcto funcionamiento de su programa con diferentes ficheros.
-
 ### Documentación de código. Doxygen
 [Doxygen](https://en.wikipedia.org/wiki/Doxygen)
-es una herramienta de código abierto generadora de documentación para escribir documentación de referencia de software. 
+es una herramienta de código abierto que permite generar documentación de referencia para proyectos de
+desarrollo software. 
 La documentación está escrita en el propio código fuente de los programas, y por lo tanto es relativamente 
 fácil de mantener actualizada. 
 Doxygen puede hacer referencias cruzadas entre la documentación y el código, de modo que el lector 
 de un documento puede referirse fácilmente al código fuente.
 
-Doxygen extrae la documentación de los comentarios de los ficheros de código fuente y 
+Doxygen extrae la documentación de los comentarios de los ficheros de código fuente
 y puede generar la salida en diferentes formatos entre los cuales están HTML, PDF LaTeX o páginas man de Unix.
 
 En esta asignatura no se propone un uso exhaustivo de Doxygen pero sí se promueve que la
@@ -195,7 +187,7 @@ $ sudo apt install texlive-latex-base
 $ sudo apt install texlive-latex-recommended
 $ sudo apt install texlive-latex-extra
 ```
-Se trata de paquetes necesarios para compilar ficheros en formato Latex.
+Los anteriores son paquetes necesarios para compilar ficheros en formato Latex.
 Más adelante en este documento se explica la necesidad de los programas que suministran estos paquetes.
 
 En el [manual de Doxygen](https://www.doxygen.nl/manual/starting.html) indica cómo comenzar a trabajar con la
@@ -203,14 +195,14 @@ herramienta.
 Si, ubicados en un directorio de trabajo se invoca `doxygen`:
 ```
 doxygen -g <config-file>
-
 ```
+
 la herramienta creará un fichero de configuración.
 Si no se le pasa el nombre del fichero como parámetro, creará un fichero con nombre `Doxyfile` preconfigurado
 para su uso.
-En el directorio de trabajo de esta práctica se encuentra un fichero `Doxyfile` ya listo para usarse con
+En el directorio de trabajo de esta práctica (`src`) se encuentra un fichero `Doxyfile` ya listo para usarse con
 proyectos de C++.
-Se ha incluído asimismo (directorio `fibonacci_sum`) el código fuente de un programa para ilustrar con el mismo el uso de
+Se ha incluído asimismo el código fuente de un programa para ilustrar con el mismo el uso de
 documentación con Doxygen.
 Si revisa Ud. el fichero `Doxyfile` (es un fichero de texto) verá toda una serie de opciones que el programa permite.
 Cada opción va precedida de una explicación de su finalidad y funcionamiento, de modo que puede Ud. probar a
