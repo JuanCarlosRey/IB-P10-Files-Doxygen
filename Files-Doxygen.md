@@ -4,6 +4,9 @@
 Los objetivos de esta práctica son que el alumnado:
 * Desarrolle programas sencillos en C++ que utilicen ficheros, así como todas las características del lenguaje
   estudiadas
+* Aloje todo el código fuente de sus programas en repositorios privados de GitHub
+* Conozca la herramienta Doxygen
+* Incluya en sus programas comentarios en el formato requerido por Doxygen
 
 ### Rúbrica de evaluacion de esta práctica
 Se señalan a continuación los aspectos más relevantes (la lista no es exhaustiva)
@@ -17,6 +20,9 @@ que se tendrán en cuenta a la hora de evaluar esta práctica:
   variables que utilice para iterar en un bucle.
 * Antes de su ejecución, todos los programas que desarrolle, deben imprimir en pantalla un
   mensaje indicando la finalidad del programa así como la información que precisará del usuario para su correcta ejecución.
+* Todos los ficheros de código del proyecto correspondiente a esta práctica han de alojarse en un repositorio
+  de GitHub
+* Los programas deben contener comentarios adecuados en el formato requerido por Doxygen
 
 ### Introducción a la criptografía
 Durante la segunda guerra mundial, el ejército alemán utilizó la máquina conocida como *Enigma*
@@ -24,10 +30,10 @@ para codificar sus mensajes.
 Básicamente dada una *semilla* la máquina generaba una secuencia de números pseudoaleatorios que era 
 difícil de reproducir, incluso aunque los detalles técnicos de la máquina pudieran ser descubiertos.
 
-Los aliados habían capturado algunas de las máquinas *Enigma*, de forma que conocían la forma
+Los aliados habían capturado algunas de las máquinas *Enigma*, de modo que conocían la forma
 en que la máquina trabajaba, pero los trabajos que se realizaron para descubrir los códigos de *Enigma* fueron
-los fundamentos de la informática moderna. 
-El propio Alan Turing participó en este tipo de trabajos.
+los fundamentos de la criptografía moderna. 
+Alan Turing participó en este tipo de trabajos.
 Si está interesado en conocer más sobre esta historia vea la película
 [The Imitation Game](https://en.wikipedia.org/wiki/The_Imitation_Game)
 (*Descifrando Enigma* en español)
@@ -35,10 +41,10 @@ Si está interesado en conocer más sobre esta historia vea la película
 La criptología es la rama de conocimiento que se ocupa del estudio y diseño de sistemas que permitan 
 comunicaciones secretas entre un emisor de un mensaje y uno o varios receptores del mismo. 
 Inicialmente las únicas aplicaciones de la criptología fueron militares, pero hoy en día son muchísimas otras.
-Por ejemplo, en los computadores multiusuarios, cada usuario prefiere mantener sus ficheros de una forma 
+Por ejemplo, en los ordenadores multiusuario, cada usuario mantiene sus ficheros de una forma 
 que no sean legibles para otros usuarios "indiscretos". 
 Para conseguir esto, los ficheros se codifican (encriptan) utilizando una clave que sólo conoce su propietario. 
-Alguna de la información que enviamos a través de internet viaja también de forma codificada para protegerla de receptores no deseados.
+Mucha de la información que enviamos a través de internet viaja también de forma codificada para protegerla de receptores no deseados.
 
 Para encriptar un fichero hay muchas alternativas. 
 Todas ellas consisten en transformar cada uno de los caracteres del fichero original en otro carácter
@@ -46,8 +52,9 @@ diferente siguiendo una determinada transformación.
 Indicaremos dos métodos diferentes de encriptado. 
 
 ## Encriptado xor (or exclusiva)
-El método requiere una clave secreta de encriptado/desencriptado.
-
+El 
+[Cifrado XOR](https://es.wikipedia.org/wiki/Cifrado_XOR)
+requiere una clave secreta de encriptado/desencriptado.
 A cada uno de los caracteres del fichero se le hará una transformación, 
 que consistirá en hacerle la operación `xor` con un carácter de la clave secreta. 
 Estudie el capítulo 
@@ -85,12 +92,14 @@ Antes de operar de este modo se procesará la clave secreta haciendo `xor` a cad
 
 Una ventaja de este método es su especial aptitud para ser utilizado en un ordenador 
 (puesto que la operación o exclusiva se realiza muy eficientemente en un ordenador). 
-
 Otra ventaja del método es que la operación de desencriptado consiste en hacer exactamente 
 lo mismo al texto que se ha encriptado (con la misma clave secreta, por supuesto).
 
 ## Cifrado de César
-Como se deduce de su nombre, este método era usado ya en tiempos de los romanos. 
+
+Como se deduce de su nombre, 
+[este método](https://es.wikipedia.org/wiki/Cifrado_C%C3%A9sar)
+este método era usado ya en tiempos de los romanos. 
 En este caso, la codificación es como sigue: si una letra en el texto a codificar es la N-ésima 
 letra del alfabeto, sustitúyase esa letra por la (N + K)-ésima letra del alfabeto. 
 (César utilizaba el valor K = 3).
@@ -320,6 +329,8 @@ de la Guía de Estilo de Google y ponga en práctica todo lo que en ella se prop
 para todos los comentarios que introduzca en su código fuente.
 
 ### Referencias
+* [Cifrado XOR](https://es.wikipedia.org/wiki/Cifrado_XOR)
+* [Cifrado César](https://es.wikipedia.org/wiki/Cifrado_C%C3%A9sar)
 * [Doxygen](https://en.wikipedia.org/wiki/Doxygen)
 * [Latex](https://en.wikipedia.org/wiki/LaTeX)
 * [Overview of supported JavaDoc style tags](http://www.time2help.com/doc/online_help/idh_java_doc_tag_support.htm)
