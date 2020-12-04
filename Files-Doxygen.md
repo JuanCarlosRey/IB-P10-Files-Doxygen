@@ -68,21 +68,21 @@ P. ej. si suponemos que la clave secreta es la palabra `alfa`, y las primeras pa
 *Informática Básica* los primeros caracteres del fichero de salida serán:
 
 ```
-carácter 1	I xor a
-carácter 2	n xor l
-carácter 3	f xor f
-carácter 4	o xor a
-carácter 5	r xor a
-carácter 6	m xor l
-carácter 7	á xor f
-carácter 8	t xor a
-carácter 9	i xor a
-carácter 9	c xor l
-carácter 10	a xor f
-carácter 11	  xor a
-carácter 12	B xor a
-carácter 13	á xor l
-carácter 14	s xor f
+carácter 1  I xor a
+carácter 2  n xor l
+carácter 3  f xor f
+carácter 4  o xor a
+carácter 5  r xor a
+carácter 6  m xor l
+carácter 7  á xor f
+carácter 8  t xor a
+carácter 9  i xor a
+carácter 9  c xor l
+carácter 10 a xor f
+carácter 11   xor a
+carácter 12 B xor a
+carácter 13 á xor l
+carácter 14 s xor f
    ...
 ```
 
@@ -108,8 +108,8 @@ letra del alfabeto, sustitúyase esa letra por la (N + K)-ésima letra del alfab
 Se muestra a continuación un texto encriptado siguiendo este método y utilizando K = 1:
 
 ```
-Texto original:	Navidad, Navidad, dulce navidad
-Texto encriptado:	Obwjebe-!Obwjebe-!evmdf!obwjebe
+Texto original:  Navidad, Navidad, dulce navidad
+Texto encriptado:  Obwjebe-!Obwjebe-!evmdf!obwjebe
 ```
 
 Se puede optar por hacer fijo el valor de K o bien solicitarlo al usuario.
@@ -212,18 +212,19 @@ puede consultarse la finalidad y funcionamiento de cada una de las etiquetas (Ta
 de configuración de Doxygen.
 
 Para generar la documentación de su aplicación, colóquese en el directorio de su proyecto 
-(`fibonacci_sum` en esta práctica) y ejecute:
+(`src` en esta práctica) y ejecute:
 ```
 doxygen Doxyfile
 ```
-en el directorio donde se encuentre el código fuente.
-Con el fichero `Doxyfile` que se suministra, la herramienta creará un subdirectorio `doc` en el que alojará
-toda la documentación generada.
+
+Con el fichero `Doxyfile` que se suministra, la herramienta creará un subdirectorio `doc` en el directorio
+raíz de su proyecto en el que alojará toda la documentación generada.
 Con la configuración suministrada se generan dos subdirectorios dentro de `doc`: `html` y `latex`.
 Si abre con un navegador el fichero `doc/html/index.html` accederá a la página principal de la documentación
 generada para el programa.
 Si se coloca en el directorio `doc/latex/` y ejecuta `make` el sistema "compila" el código latex y genera un
 fichero `refman.pdf` que contiene igualmente la documentación generada.
+
 Tal como se ha indicado, HTML o latex son solo dos de los formatos que permite generar Doxygen.
 Tanto HTML como Latex (también Markdown) son lo que se conoce como 
 [lenguajes de marcas](https://es.wikipedia.org/wiki/Lenguaje_de_marcado).
@@ -237,7 +238,6 @@ La sección
 [Documenting the code](https://www.doxygen.nl/manual/config.html)
 del manual de Doxygen indica cómo comentar el código fuente de modo que los comentarios sean procesados por
 Doxygen para incorporarlos a la documentación generada.
-
 En la asignatura se propone utilizar comentarios de tipo JavaDoc para comentarios de bloque:
 ```
 /**
@@ -276,7 +276,7 @@ Así el bloque de comentarios que debe preceder a cualquier función (o método)
  * @param values Container whose values are summed.
  * @return sum of `values`, or 0.0 if `values` is empty.
  */
-double sum(std::vector<double> & const values) {
+double sum(std::vector<double>& const values) {
   ...
 }
 ```
@@ -293,16 +293,16 @@ El siguiente es un ejemplo (plantilla) de comentario de bloque que debería incl
   * Escuela Superior de Ingeniería y Tecnología
   * Grado en Ingeniería Informática
   * Informática Básica
-	*
-	* @file fibonacci_main.cc
+  *
+  * @file fibonacci_main.cc
   * @author F. de Sande fsande@ull.es
   * @date 23 Jun 2020
   * @brief El programa calcula la suma de todos los términos de valor par de la serie
-	*        de Fibonacci que sean menores que un valor dado.
+  *        de Fibonacci que sean menores que un valor dado.
   *        Cada nuevo término de la serie se genera sumando los dos anteriores.
   *        Comenzando con 0 y 1, los primeros 10 términos serán: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34
   * @bug No hay bugs conocidos
-	* @see https://www.cs.cmu.edu/~410/doc/doxygen.html
+  * @see https://www.cs.cmu.edu/~410/doc/doxygen.html
   */
 ```
 Todo fichero debiera contener (etiqueta `@brief`) una breve descripción del contenido del fichero.
